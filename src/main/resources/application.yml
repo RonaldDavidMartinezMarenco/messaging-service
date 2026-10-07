@@ -1,0 +1,14 @@
+server:
+  port: ${SERVER_PORT:8084}
+
+spring:
+  application:
+    name: messaging-service
+  mvc:
+    problemdetails:
+      enabled: true
+
+twilio:
+  account-sid: ${TWILIO_ACCOUNT_SID:}
+  auth-token: ${TWILIO_AUTH_TOKEN:}
+  from-number: ${TWILIO_FROM_NUMBER:}
