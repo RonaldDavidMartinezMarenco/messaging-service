@@ -8,7 +8,19 @@ spring:
     problemdetails:
       enabled: true
 
+textbee:
+  api-key: ${TEXTBEE_API_KEY:}
+  base-url: ${TEXTBEE_BASE_URL:https://api.textbee.dev/api/v1}
+  device-id: ${TEXTBEE_DEVICE_ID:}
+
 twilio:
   account-sid: ${TWILIO_ACCOUNT_SID:}
   auth-token: ${TWILIO_AUTH_TOKEN:}
   from-number: ${TWILIO_FROM_NUMBER:}
+
+foodcourt:
+  messaging:
+    provider: ${MESSAGING_PROVIDER:textbee}
+  security:
+    jwt-secret: ${JWT_SECRET}
+    jwt-ttl: ${JWT_TTL:PT8H}
