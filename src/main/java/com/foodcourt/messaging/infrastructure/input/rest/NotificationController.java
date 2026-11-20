@@ -25,7 +25,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 /**
- * Asks Twilio to send the ready-order PIN. The class is not final: method security needs a CGLIB subclass.
+ * Requests a ready-order notification. The class is not final: method security needs a CGLIB subclass.
  */
 @RestController
 @Validated
@@ -43,11 +43,11 @@ class NotificationController {
     @PostMapping("/notifications/order-ready")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @Operation(
-            summary = "Send the ready-order PIN by SMS",
+            summary = "Request the order-ready notification",
             description = "The employee token is required. The message text is fixed. "
                     + "phone is E.164 and pin is six digits. The response does not repeat the PIN.")
     @ApiResponses({
-            @ApiResponse(responseCode = "202", description = "Twilio accepted the SMS", content = @Content(
+            @ApiResponse(responseCode = "202", description = "The configured sender accepted the notification request", content = @Content(
                     mediaType = "application/json",
                     schema = @Schema(implementation = NotificationResponse.class),
                     examples = @ExampleObject(name = "SMS accepted", value = """
@@ -56,7 +56,7 @@ class NotificationController {
             @ApiResponse(responseCode = "400", description = "Invalid phone, PIN, or an unknown field"),
             @ApiResponse(responseCode = "401", description = "Missing or invalid access token"),
             @ApiResponse(responseCode = "403", description = "The caller is not an employee"),
-            @ApiResponse(responseCode = "502", description = "Twilio rejected the SMS")
+            @ApiResponse(responseCode = "502", description = "The SMS provider did not accept the notification")
     })
     @PreAuthorize("hasRole('EMPLOYEE')")
     public NotificationResponse notify(
