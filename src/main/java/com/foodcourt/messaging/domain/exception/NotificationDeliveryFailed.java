@@ -1,6 +1,6 @@
 package com.foodcourt.messaging.domain.exception;
 
-/** Twilio did not accept the SMS. Mapped to HTTP 502. The message does not include the PIN. */
+/** The SMS provider rejected the request. Mapped to HTTP 502 without exposing the PIN. */
 public final class NotificationDeliveryFailed extends RuntimeException {
 
     public NotificationDeliveryFailed() {
